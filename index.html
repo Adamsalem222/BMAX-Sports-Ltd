@@ -1,162 +1,307 @@
-<!DOCTYPE html>document.addEventListener('DOMContentLoaded', function () {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BMAX Sports Ltd | Heavy-Duty Boxing, MMA &amp; Fitness Equipment — Blackburn</title>
+<meta name="description" content="BMAX Sports Ltd manufactures heavy-duty punch bags, sandbags, and hanging hardware direct from Blackburn, UK. Commercial-grade gear, factory-direct prices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-  /* ---------- Mobile menu toggle ---------- */
-  var burgerBtn = document.getElementById('burgerBtn');
-  var mobileMenu = document.getElementById('mobileMenu');
+<!-- ============ HEADER / NAV ============ -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="#" class="logo" aria-label="BMAX Sports home">
+      <span class="logo-mark">BMAX</span><span class="logo-sub">SPORTS</span>
+    </a>
 
-  burgerBtn.addEventListener('click', function () {
-    var isOpen = mobileMenu.classList.toggle('open');
-    burgerBtn.classList.toggle('open', isOpen);
-    burgerBtn.setAttribute('aria-expanded', String(isOpen));
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  });
+    <nav class="main-nav" id="mainNav" aria-label="Primary">
+      <ul>
+        <li class="has-dropdown">
+          <a href="#shop">Shop Gear</a>
+          <ul class="dropdown">
+            <li><a href="#bags">Punch Bags</a></li>
+            <li><a href="#sandbags">Sandbags</a></li>
+            <li><a href="#brackets">Brackets &amp; Chains</a></li>
+            <li><a href="#bundles">Bundles</a></li>
+          </ul>
+        </li>
+        <li><a href="#custom">Custom Orders</a></li>
+        <li><a href="#bulk">Gym Bulk Sales</a></li>
+        <li><a href="#story" class="nav-secondary">Our Story</a></li>
+      </ul>
+    </nav>
 
-  mobileMenu.querySelectorAll('a').forEach(function (link) {
-    link.addEventListener('click', function () {
-      mobileMenu.classList.remove('open');
-      burgerBtn.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    });
-  });
+    <div class="header-actions">
+      <button class="icon-btn" id="searchToggle" aria-label="Search">
+        <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Account">
+        <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <button class="cart-btn" id="cartBtn" aria-label="Cart">
+        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M3 6h2l2 12h11l2-9H7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="9" cy="21" r="1.4" fill="currentColor"/><circle cx="17" cy="21" r="1.4" fill="currentColor"/></svg>
+        <span class="cart-badge" id="cartCount">0</span>
+        <span class="cart-weight" id="cartWeight">0kg</span>
+      </button>
+      <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
 
-  /* ---------- Search panel toggle ---------- */
-  var searchToggle = document.getElementById('searchToggle');
-  var searchPanel = document.getElementById('searchPanel');
+  <div class="search-panel" id="searchPanel">
+    <div class="search-panel-inner">
+      <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="text" placeholder="Search punch bags, sandbags, brackets...">
+    </div>
+  </div>
+</header>
 
-  searchToggle.addEventListener('click', function () {
-    searchPanel.classList.toggle('open');
-    if (searchPanel.classList.contains('open')) {
-      var input = searchPanel.querySelector('input');
-      if (input) input.focus();
-    }
-  });
+<!-- Mobile full-screen menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#shop">Shop Gear</a></li>
+    <li><a href="#custom">Custom Orders</a></li>
+    <li><a href="#bulk">Gym Bulk Sales</a></li>
+    <li><a href="#story">Our Story</a></li>
+  </ul>
+</div>
 
-  /* ---------- Fill option helper text ---------- */
-  var fillSelect = document.getElementById('fillSelect');
-  var fillHelper = document.getElementById('fillHelper');
+<main>
 
-  if (fillSelect && fillHelper) {
-    var helperCopy = {
-      filled: 'Pre-filled bags arrive ready to hang — no setup required.',
-      unfilled: 'Unfilled bags ship flat-packed — fill on arrival with sand, textiles, or our fill kits.'
-    };
-    fillSelect.addEventListener('change', function () {
-      fillHelper.textContent = helperCopy[fillSelect.value] || '';
-    });
-  }
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-media" aria-hidden="true">
+      <div class="hero-media-overlay"></div>
+      <div class="impact-crack"></div>
+    </div>
+    <div class="hero-content">
+      <span class="eyebrow">Blackburn-Built · Direct To Your Door</span>
+      <h1>Built to take<br>a beating.<br><span class="accent-text">Made to outlast it.</span></h1>
+      <p class="hero-sub">BMAX Sports manufactures heavy-duty boxing, MMA, and outdoor fitness equipment right here in Blackburn — cutting out the middleman so you get commercial-grade gear at factory-direct prices.</p>
+      <div class="hero-cta-row">
+        <a href="#shop" class="btn btn-primary">Shop Heavy-Duty Gear <span aria-hidden="true">→</span></a>
+        <a href="#bundles" class="btn btn-ghost">Build Your Bundle</a>
+      </div>
+      <ul class="hero-stats">
+        <li><strong>98.6%</strong> Positive Feedback</li>
+        <li><strong>10,000+</strong> Bags Shipped</li>
+        <li><strong>Next-Day</strong> UK Dispatch</li>
+      </ul>
+    </div>
+  </section>
 
-  /* ---------- Weight badge selection (sandbags) ---------- */
-  var weightBadges = document.querySelectorAll('.weight-badge');
-  var activeSandbagWeight = 35;
+  <!-- ============ TRUST BAR ============ -->
+  <section class="trust-bar" id="story">
+    <div class="trust-inner">
+      <div class="trust-card">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" width="36" height="36"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Built Like It's Going To War</h3>
+        <p>Double-stitched seams, military-grade canvas, and reinforced strap points — the same construction quality that's earned us a 98.6% positive rating from thousands of verified marketplace buyers.</p>
+        <span class="badge">★ 98.6% Positive Feedback (eBay Verified)</span>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" width="36" height="36"><path d="M13 2L4 14h7l-2 8 9-12h-7z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Dispatched From Blackburn, Fast</h3>
+        <p>No overseas warehouses, no waiting weeks. Every order ships direct from our UK manufacturing base with rapid, tracked delivery — because a training plan shouldn't stall on shipping.</p>
+        <span class="badge">🚚 Next-Day Dispatch Available</span>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" width="36" height="36"><rect x="3" y="8" width="18" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 8l9-5 9 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Everything You Need, Nothing Wasted</h3>
+        <p>Our complete training bundles pair bags, chains, brackets, and gloves at a fraction of buying separately — heavy-duty kit, ready to hang and hit on day one.</p>
+        <span class="badge">Save Up To 30% on Bundles</span>
+      </div>
+    </div>
+  </section>
 
-  weightBadges.forEach(function (badge) {
-    badge.addEventListener('click', function () {
-      weightBadges.forEach(function (b) { b.classList.remove('active'); });
-      badge.classList.add('active');
-      activeSandbagWeight = parseInt(badge.getAttribute('data-weight'), 10);
+  <!-- ============ PRODUCT GRID ============ -->
+  <section class="products" id="shop">
+    <div class="section-head">
+      <span class="eyebrow">The Range</span>
+      <h2>Gear That Doesn't Quit</h2>
+    </div>
 
-      var sandbagAddBtn = document.querySelector('#sandbags .add-to-cart');
-      if (sandbagAddBtn) sandbagAddBtn.setAttribute('data-weight', activeSandbagWeight);
-    });
-  });
-  if (weightBadges.length) weightBadges[0].classList.add('active');
+    <div class="product-grid">
 
-  /* ---------- Cart weight counter ---------- */
-  var cartCountEl = document.getElementById('cartCount');
-  var cartWeightEl = document.getElementById('cartWeight');
-  var cartCount = 0;
-  var cartWeight = 0;
+      <!-- Card 1: Punch Bags -->
+      <article class="product-card" id="bags">
+        <div class="product-media">
+          <div class="product-img product-img--bags"></div>
+        </div>
+        <div class="product-body">
+          <h3>Commercial-Grade Punch Bags</h3>
+          <p>From 4ft starter bags to full 6ft commercial rigs — engineered for daily heavy-contact training.</p>
 
-  document.querySelectorAll('.add-to-cart').forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
-      e.preventDefault();
-      var weight = parseInt(btn.getAttribute('data-weight'), 10) || 0;
-      cartCount += 1;
-      cartWeight += weight;
-      cartCountEl.textContent = cartCount;
-      cartWeightEl.textContent = cartWeight + 'kg';
+          <label class="field-label" for="fillSelect">Fill Option</label>
+          <select id="fillSelect" class="select-input">
+            <option value="filled">Pre-Filled (Ready to Hang)</option>
+            <option value="unfilled">Unfilled — Save 70% on Shipping</option>
+          </select>
+          <p class="helper-text" id="fillHelper">Unfilled bags ship flat-packed — fill on arrival with sand, textiles, or our fill kits.</p>
 
-      var cartBtn = document.getElementById('cartBtn');
-      cartBtn.style.transform = 'scale(1.08)';
-      setTimeout(function () { cartBtn.style.transform = 'scale(1)'; }, 160);
-    });
-  });
+          <button class="btn btn-primary btn-block add-to-cart" data-weight="35">View Punch Bags</button>
+        </div>
+      </article>
 
-  /* ---------- Bundle builder drawer ---------- */
-  var bundleCheckbox = document.getElementById('bundleCheckbox');
-  var bundleDrawer = document.getElementById('bundleDrawer');
-  var bundleCountEl = document.getElementById('bundleCount');
-  var bundleWeightEl = document.getElementById('bundleWeight');
-  var bundleCount = 0;
-  var bundleWeight = 0;
+      <!-- Card 2: Sandbags -->
+      <article class="product-card" id="sandbags">
+        <div class="product-media">
+          <div class="product-img product-img--sandbags"></div>
+        </div>
+        <div class="product-body">
+          <h3>Weighted Training Sandbags</h3>
+          <p>Rugged, tear-resistant sandbags for strength conditioning, functional fitness, and outdoor bootcamps.</p>
 
-  if (bundleCheckbox) {
-    bundleCheckbox.addEventListener('change', function () {
-      if (bundleCheckbox.checked) {
-        bundleCount += 1;
-        bundleWeight += 4; // approximate bracket/chain weight in kg
-        bundleDrawer.classList.add('open');
-      } else {
-        bundleCount = Math.max(0, bundleCount - 1);
-        bundleWeight = Math.max(0, bundleWeight - 4);
-        if (bundleCount === 0) bundleDrawer.classList.remove('open');
-      }
-      bundleCountEl.textContent = bundleCount;
-      bundleWeightEl.textContent = bundleWeight + 'kg';
-    });
-  }
+          <div class="field-label">Weight</div>
+          <div class="weight-badges" id="weightBadges">
+            <button class="weight-badge" data-weight="35">35kg</button>
+            <button class="weight-badge" data-weight="50">50kg</button>
+            <button class="weight-badge" data-weight="60">60kg</button>
+          </div>
 
-  /* ---------- Logo upload label update ---------- */
-  var logoUpload = document.getElementById('logoUpload');
-  var uploadLabel = document.getElementById('uploadLabel');
+          <button class="btn btn-primary btn-block add-to-cart" data-weight="35">Shop Sandbags</button>
+        </div>
+      </article>
 
-  if (logoUpload) {
-    logoUpload.addEventListener('change', function () {
-      if (logoUpload.files && logoUpload.files.length > 0) {
-        uploadLabel.textContent = logoUpload.files[0].name;
-      } else {
-        uploadLabel.textContent = 'Drop your logo here or click to upload';
-      }
-    });
-  }
+      <!-- Card 3: Brackets & Chains -->
+      <article class="product-card" id="brackets">
+        <div class="product-media">
+          <div class="product-img product-img--brackets"></div>
+        </div>
+        <div class="product-body">
+          <h3>Brackets, Chains &amp; Mounts</h3>
+          <p>Wall and ceiling-rated hardware built to hold serious weight — because your bag is only as reliable as what it hangs from.</p>
 
-  /* ---------- Quote form submit (client-side only demo) ---------- */
-  var quoteForm = document.getElementById('quoteForm');
-  var formSuccess = document.getElementById('formSuccess');
+          <label class="checkbox-row">
+            <input type="checkbox" id="bundleCheckbox">
+            <span>Add to Bundle Builder</span>
+          </label>
 
-  if (quoteForm) {
-    quoteForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      if (!quoteForm.checkValidity()) {
-        quoteForm.reportValidity();
-        return;
-      }
-      formSuccess.classList.add('visible');
-      quoteForm.reset();
-      uploadLabel.textContent = 'Drop your logo here or click to upload';
-      setTimeout(function () { formSuccess.classList.remove('visible'); }, 5000);
-    });
-  }
+          <button class="btn btn-primary btn-block add-to-cart" data-weight="4">View Brackets &amp; Chains</button>
+        </div>
+      </article>
 
-  /* ---------- Newsletter form submit (client-side only demo) ---------- */
-  var newsletterForm = document.getElementById('newsletterForm');
-  var newsletterSuccess = document.getElementById('newsletterSuccess');
+    </div>
+  </section>
 
-  if (newsletterForm) {
-    newsletterForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      if (!newsletterForm.checkValidity()) {
-        newsletterForm.reportValidity();
-        return;
-      }
-      newsletterSuccess.classList.add('visible');
-      newsletterForm.reset();
-      setTimeout(function () { newsletterSuccess.classList.remove('visible'); }, 5000);
-    });
-  }
+  <!-- Bundle drawer -->
+  <div class="bundle-drawer" id="bundleDrawer">
+    <div class="bundle-drawer-inner">
+      <span>Bundle Builder: <strong id="bundleCount">0</strong> items · <strong id="bundleWeight">0kg</strong> total</span>
+      <a href="#bundles" class="btn btn-ghost btn-small">Review Bundle</a>
+    </div>
+  </div>
 
-  /* ---------- Footer year ---------- */
-  var yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+  <!-- ============ B2B LEAD GEN ============ -->
+  <section class="b2b" id="custom">
+    <div class="b2b-inner">
+      <div class="b2b-copy" id="bulk">
+        <span class="eyebrow">For Gyms, Clubs &amp; Schools</span>
+        <h2>Need It Custom? We'll Build It.</h2>
+        <p>From branded punch bags for your commercial gym to bulk sandbag orders for school PE departments, BMAX manufactures to your spec — your logo, your colours, your quantities. Same Blackburn factory, same durability guarantee.</p>
+        <ul class="b2b-list">
+          <li>Custom logo &amp; colourway printing</li>
+          <li>Bulk pricing tiers for gyms &amp; clubs</li>
+          <li>Dedicated account manager for repeat orders</li>
+        </ul>
+      </div>
 
-});
+      <div class="b2b-form-card">
+        <h3>Get A Bulk Quote</h3>
+        <form id="quoteForm" novalidate>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="orgType">Organization Type</label>
+            <select id="orgType" name="orgType" required>
+              <option value="">Select one...</option>
+              <option>Commercial Gym</option>
+              <option>Boxing &amp; MMA Club</option>
+              <option>School</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="quantity">Bulk Quantity Needed</label>
+            <input type="number" id="quantity" name="quantity" min="1" placeholder="e.g. 20" required>
+            <span class="helper-text">Approximate units — we'll confirm exact pricing.</span>
+          </div>
+          <div class="form-group">
+            <label for="logoUpload" class="upload-zone" id="uploadZone">
+              <svg viewBox="0 0 24 24" width="28" height="28"><path d="M12 16V4M12 4l-4 4M12 4l4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+              <span id="uploadLabel">Drop your logo here or click to upload</span>
+              <input type="file" id="logoUpload" name="logoUpload" accept="image/*" hidden>
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Request My Custom Quote</button>
+          <p class="form-trust">No obligation — a member of our Blackburn team replies within 1 business day.</p>
+          <p class="form-success" id="formSuccess" role="status">Thanks — your quote request has been noted. We'll be in touch shortly.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>Find Us On</h4>
+      <ul>
+        <li><a href="#">eBay Store — 98.6% Positive Feedback ↗</a></li>
+        <li><a href="#">Amazon Storefront ↗</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">Shipping &amp; Freight Info</a></li>
+        <li><a href="#">Returns &amp; Warranty Policy</a></li>
+        <li><a href="#">Track My Order</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>BMAX Sports</h4>
+      <ul>
+        <li><a href="#">Our Blackburn Factory</a></li>
+        <li><a href="#custom">Custom &amp; Bulk Orders</a></li>
+        <li><a href="#bulk">Wholesale Enquiries</a></li>
+      </ul>
+      <p class="footer-disclosure">Proudly designed and manufactured in Blackburn, Lancashire.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Join The Inner Circle</h4>
+      <p>Early access to new gear drops, bundle deals, and factory-direct discounts.</p>
+      <form class="newsletter-form" id="newsletterForm">
+        <input type="email" placeholder="Enter your email" required>
+        <button type="submit">Join <span aria-hidden="true">→</span></button>
+      </form>
+      <p class="footer-disclosure">No spam — just serious training gear, straight from the factory.</p>
+      <p class="newsletter-success" id="newsletterSuccess" role="status">You're in. Watch your inbox.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© <span id="year"></span> BMAX Sports Ltd — Blackburn, UK</span>
+    <span class="footer-links"><a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a></span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
