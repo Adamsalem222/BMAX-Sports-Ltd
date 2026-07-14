@@ -1,0 +1,162 @@
+document.addEventListener('DOMContentLoaded', function () {
+
+  /* ---------- Mobile menu toggle ---------- */
+  var burgerBtn = document.getElementById('burgerBtn');
+  var mobileMenu = document.getElementById('mobileMenu');
+
+  burgerBtn.addEventListener('click', function () {
+    var isOpen = mobileMenu.classList.toggle('open');
+    burgerBtn.classList.toggle('open', isOpen);
+    burgerBtn.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  mobileMenu.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      mobileMenu.classList.remove('open');
+      burgerBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  /* ---------- Search panel toggle ---------- */
+  var searchToggle = document.getElementById('searchToggle');
+  var searchPanel = document.getElementById('searchPanel');
+
+  searchToggle.addEventListener('click', function () {
+    searchPanel.classList.toggle('open');
+    if (searchPanel.classList.contains('open')) {
+      var input = searchPanel.querySelector('input');
+      if (input) input.focus();
+    }
+  });
+
+  /* ---------- Fill option helper text ---------- */
+  var fillSelect = document.getElementById('fillSelect');
+  var fillHelper = document.getElementById('fillHelper');
+
+  if (fillSelect && fillHelper) {
+    var helperCopy = {
+      filled: 'Pre-filled bags arrive ready to hang — no setup required.',
+      unfilled: 'Unfilled bags ship flat-packed — fill on arrival with sand, textiles, or our fill kits.'
+    };
+    fillSelect.addEventListener('change', function () {
+      fillHelper.textContent = helperCopy[fillSelect.value] || '';
+    });
+  }
+
+  /* ---------- Weight badge selection (sandbags) ---------- */
+  var weightBadges = document.querySelectorAll('.weight-badge');
+  var activeSandbagWeight = 35;
+
+  weightBadges.forEach(function (badge) {
+    badge.addEventListener('click', function () {
+      weightBadges.forEach(function (b) { b.classList.remove('active'); });
+      badge.classList.add('active');
+      activeSandbagWeight = parseInt(badge.getAttribute('data-weight'), 10);
+
+      var sandbagAddBtn = document.querySelector('#sandbags .add-to-cart');
+      if (sandbagAddBtn) sandbagAddBtn.setAttribute('data-weight', activeSandbagWeight);
+    });
+  });
+  if (weightBadges.length) weightBadges[0].classList.add('active');
+
+  /* ---------- Cart weight counter ---------- */
+  var cartCountEl = document.getElementById('cartCount');
+  var cartWeightEl = document.getElementById('cartWeight');
+  var cartCount = 0;
+  var cartWeight = 0;
+
+  document.querySelectorAll('.add-to-cart').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      var weight = parseInt(btn.getAttribute('data-weight'), 10) || 0;
+      cartCount += 1;
+      cartWeight += weight;
+      cartCountEl.textContent = cartCount;
+      cartWeightEl.textContent = cartWeight + 'kg';
+
+      var cartBtn = document.getElementById('cartBtn');
+      cartBtn.style.transform = 'scale(1.08)';
+      setTimeout(function () { cartBtn.style.transform = 'scale(1)'; }, 160);
+    });
+  });
+
+  /* ---------- Bundle builder drawer ---------- */
+  var bundleCheckbox = document.getElementById('bundleCheckbox');
+  var bundleDrawer = document.getElementById('bundleDrawer');
+  var bundleCountEl = document.getElementById('bundleCount');
+  var bundleWeightEl = document.getElementById('bundleWeight');
+  var bundleCount = 0;
+  var bundleWeight = 0;
+
+  if (bundleCheckbox) {
+    bundleCheckbox.addEventListener('change', function () {
+      if (bundleCheckbox.checked) {
+        bundleCount += 1;
+        bundleWeight += 4; // approximate bracket/chain weight in kg
+        bundleDrawer.classList.add('open');
+      } else {
+        bundleCount = Math.max(0, bundleCount - 1);
+        bundleWeight = Math.max(0, bundleWeight - 4);
+        if (bundleCount === 0) bundleDrawer.classList.remove('open');
+      }
+      bundleCountEl.textContent = bundleCount;
+      bundleWeightEl.textContent = bundleWeight + 'kg';
+    });
+  }
+
+  /* ---------- Logo upload label update ---------- */
+  var logoUpload = document.getElementById('logoUpload');
+  var uploadLabel = document.getElementById('uploadLabel');
+
+  if (logoUpload) {
+    logoUpload.addEventListener('change', function () {
+      if (logoUpload.files && logoUpload.files.length > 0) {
+        uploadLabel.textContent = logoUpload.files[0].name;
+      } else {
+        uploadLabel.textContent = 'Drop your logo here or click to upload';
+      }
+    });
+  }
+
+  /* ---------- Quote form submit (client-side only demo) ---------- */
+  var quoteForm = document.getElementById('quoteForm');
+  var formSuccess = document.getElementById('formSuccess');
+
+  if (quoteForm) {
+    quoteForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!quoteForm.checkValidity()) {
+        quoteForm.reportValidity();
+        return;
+      }
+      formSuccess.classList.add('visible');
+      quoteForm.reset();
+      uploadLabel.textContent = 'Drop your logo here or click to upload';
+      setTimeout(function () { formSuccess.classList.remove('visible'); }, 5000);
+    });
+  }
+
+  /* ---------- Newsletter form submit (client-side only demo) ---------- */
+  var newsletterForm = document.getElementById('newsletterForm');
+  var newsletterSuccess = document.getElementById('newsletterSuccess');
+
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!newsletterForm.checkValidity()) {
+        newsletterForm.reportValidity();
+        return;
+      }
+      newsletterSuccess.classList.add('visible');
+      newsletterForm.reset();
+      setTimeout(function () { newsletterSuccess.classList.remove('visible'); }, 5000);
+    });
+  }
+
+  /* ---------- Footer year ---------- */
+  var yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+});
