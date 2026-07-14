@@ -61,26 +61,88 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   if (weightBadges.length) weightBadges[0].classList.add('active');
 
-  /* ---------- Cart weight counter ---------- */
+  /* ---------- Cart: state + rendering ---------- */
   var cartCountEl = document.getElementById('cartCount');
   var cartWeightEl = document.getElementById('cartWeight');
-  var cartCount = 0;
-  var cartWeight = 0;
+  var cartPanelWeightEl = document.getElementById('cartPanelWeight');
+  var cartItemsEl = document.getElementById('cartItems');
+  var cartBtn = document.getElementById('cartBtn');
+  var cartPanel = document.getElementById('cartPanel');
+  var cartClearBtn = document.getElementById('cartClear');
+
+  var cart = []; // { name, weight }
+
+  function renderCart() {
+    var totalWeight = cart.reduce(function (sum, item) { return sum + item.weight; }, 0);
+
+    cartCountEl.textContent = cart.length;
+    cartWeightEl.textContent = totalWeight + 'kg';
+    cartPanelWeightEl.textContent = totalWeight + 'kg';
+
+    cartItemsEl.innerHTML = '';
+
+    if (cart.length === 0) {
+      var empty = document.createElement('li');
+      empty.className = 'cart-empty';
+      empty.textContent = 'Your cart is empty. Add some heavy-duty gear.';
+      cartItemsEl.appendChild(empty);
+      return;
+    }
+
+    cart.forEach(function (item, index) {
+      var li = document.createElement('li');
+      li.className = 'cart-item';
+      li.innerHTML =
+        '<div class="cart-item-info"><strong></strong><span></span></div>' +
+        '<button class="cart-item-remove" aria-label="Remove item">&times;</button>';
+      li.querySelector('.cart-item-info strong').textContent = item.name;
+      li.querySelector('.cart-item-info span').textContent = item.weight + 'kg';
+      li.querySelector('.cart-item-remove').addEventListener('click', function () {
+        cart.splice(index, 1);
+        renderCart();
+      });
+      cartItemsEl.appendChild(li);
+    });
+  }
 
   document.querySelectorAll('.add-to-cart').forEach(function (btn) {
     btn.addEventListener('click', function (e) {
       e.preventDefault();
       var weight = parseInt(btn.getAttribute('data-weight'), 10) || 0;
-      cartCount += 1;
-      cartWeight += weight;
-      cartCountEl.textContent = cartCount;
-      cartWeightEl.textContent = cartWeight + 'kg';
+      var name = btn.getAttribute('data-name') || 'Item';
 
-      var cartBtn = document.getElementById('cartBtn');
-      cartBtn.style.transform = 'scale(1.08)';
+      cart.push({ name: name, weight: weight });
+      renderCart();
+
+      cartBtn.style.transform = 'scale(1.1)';
       setTimeout(function () { cartBtn.style.transform = 'scale(1)'; }, 160);
+
+      cartPanel.classList.add('open');
+      cartBtn.setAttribute('aria-expanded', 'true');
     });
   });
+
+  /* ---------- Cart panel toggle + clear ---------- */
+  cartBtn.addEventListener('click', function () {
+    var isOpen = cartPanel.classList.toggle('open');
+    cartBtn.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  cartClearBtn.addEventListener('click', function () {
+    cart = [];
+    renderCart();
+  });
+
+  // Close cart panel when clicking outside it
+  document.addEventListener('click', function (e) {
+    var cartWrap = document.querySelector('.cart-wrap');
+    if (cartWrap && !cartWrap.contains(e.target)) {
+      cartPanel.classList.remove('open');
+      cartBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  renderCart();
 
   /* ---------- Bundle builder drawer ---------- */
   var bundleCheckbox = document.getElementById('bundleCheckbox');
