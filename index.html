@@ -43,11 +43,28 @@
       <button class="icon-btn" aria-label="Account">
         <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </button>
-      <button class="cart-btn" id="cartBtn" aria-label="Cart">
-        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M3 6h2l2 12h11l2-9H7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="9" cy="21" r="1.4" fill="currentColor"/><circle cx="17" cy="21" r="1.4" fill="currentColor"/></svg>
-        <span class="cart-badge" id="cartCount">0</span>
-        <span class="cart-weight" id="cartWeight">0kg</span>
-      </button>
+      <div class="cart-wrap">
+        <button class="cart-btn" id="cartBtn" aria-label="Open cart" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M3 6h2l2 12h11l2-9H7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="9" cy="21" r="1.4" fill="currentColor"/><circle cx="17" cy="21" r="1.4" fill="currentColor"/></svg>
+          <span class="cart-badge" id="cartCount">0</span>
+          <span class="cart-weight" id="cartWeight">0kg</span>
+        </button>
+
+        <div class="cart-panel" id="cartPanel">
+          <div class="cart-panel-head">
+            <span>Your Cart</span>
+            <button class="cart-clear" id="cartClear" type="button">Clear</button>
+          </div>
+          <ul class="cart-items" id="cartItems">
+            <li class="cart-empty" id="cartEmpty">Your cart is empty. Add some heavy-duty gear.</li>
+          </ul>
+          <div class="cart-panel-foot">
+            <span>Total weight</span>
+            <strong id="cartPanelWeight">0kg</strong>
+          </div>
+          <button class="btn btn-primary btn-block cart-checkout">Go To Checkout</button>
+        </div>
+      </div>
       <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -137,8 +154,18 @@
 
       <!-- Card 1: Punch Bags -->
       <article class="product-card" id="bags">
-        <div class="product-media">
-          <div class="product-img product-img--bags"></div>
+        <div class="product-media product-media--bags">
+          <svg viewBox="0 0 200 220" class="product-illustration">
+            <line x1="100" y1="0" x2="100" y2="34" stroke="#4a4a4a" stroke-width="3"/>
+            <path d="M92 20h16v10a4 4 0 01-4 4h-8a4 4 0 01-4-4z" fill="#3a3a3a"/>
+            <path d="M76 34 L124 34 L134 90 Q140 150 110 200 Q100 210 90 200 Q60 150 66 90 Z" fill="#262626" stroke="#E10600" stroke-width="2"/>
+            <line x1="76" y1="60" x2="124" y2="60" stroke="#3a3a3a" stroke-width="2"/>
+            <line x1="70" y1="95" x2="130" y2="95" stroke="#3a3a3a" stroke-width="2"/>
+            <line x1="68" y1="130" x2="132" y2="130" stroke="#3a3a3a" stroke-width="2"/>
+            <line x1="76" y1="34" x2="66" y2="90" stroke="#333" stroke-width="1.5"/>
+            <line x1="124" y1="34" x2="134" y2="90" stroke="#333" stroke-width="1.5"/>
+            <text x="100" y="20" text-anchor="middle" fill="#E10600" font-size="9" font-weight="700" font-family="Inter, sans-serif">BMAX</text>
+          </svg>
         </div>
         <div class="product-body">
           <h3>Commercial-Grade Punch Bags</h3>
@@ -151,14 +178,22 @@
           </select>
           <p class="helper-text" id="fillHelper">Unfilled bags ship flat-packed — fill on arrival with sand, textiles, or our fill kits.</p>
 
-          <button class="btn btn-primary btn-block add-to-cart" data-weight="35">View Punch Bags</button>
+          <button class="btn btn-primary btn-block add-to-cart" data-weight="35" data-name="Punch Bag">View Punch Bags</button>
         </div>
       </article>
 
       <!-- Card 2: Sandbags -->
       <article class="product-card" id="sandbags">
-        <div class="product-media">
-          <div class="product-img product-img--sandbags"></div>
+        <div class="product-media product-media--sandbags">
+          <svg viewBox="0 0 200 220" class="product-illustration">
+            <ellipse cx="100" cy="150" rx="62" ry="38" fill="#221a12" stroke="#3a2c1a" stroke-width="2"/>
+            <path d="M42 150 Q40 95 60 70 Q80 50 100 50 Q120 50 140 70 Q160 95 158 150 Q158 185 100 190 Q42 185 42 150Z" fill="#2b2115" stroke="#E10600" stroke-width="2"/>
+            <path d="M70 75 Q100 65 130 75" fill="none" stroke="#4a3a22" stroke-width="2"/>
+            <path d="M55 110 Q100 100 145 110" fill="none" stroke="#4a3a22" stroke-width="2"/>
+            <path d="M50 140 Q100 132 150 140" fill="none" stroke="#4a3a22" stroke-width="2"/>
+            <rect x="86" y="48" width="28" height="14" rx="3" fill="#1a1a1a" stroke="#4a4a4a" stroke-width="1.5"/>
+            <text x="100" y="120" text-anchor="middle" fill="#E10600" font-size="9" font-weight="700" font-family="Inter, sans-serif">BMAX</text>
+          </svg>
         </div>
         <div class="product-body">
           <h3>Weighted Training Sandbags</h3>
@@ -171,14 +206,28 @@
             <button class="weight-badge" data-weight="60">60kg</button>
           </div>
 
-          <button class="btn btn-primary btn-block add-to-cart" data-weight="35">Shop Sandbags</button>
+          <button class="btn btn-primary btn-block add-to-cart" data-weight="35" data-name="Sandbag">Shop Sandbags</button>
         </div>
       </article>
 
       <!-- Card 3: Brackets & Chains -->
       <article class="product-card" id="brackets">
-        <div class="product-media">
-          <div class="product-img product-img--brackets"></div>
+        <div class="product-media product-media--brackets">
+          <svg viewBox="0 0 200 220" class="product-illustration">
+            <rect x="40" y="30" width="70" height="16" rx="2" fill="#2c2c2c" stroke="#E10600" stroke-width="2"/>
+            <circle cx="52" cy="38" r="3" fill="#666"/>
+            <circle cx="98" cy="38" r="3" fill="#666"/>
+            <line x1="75" y1="46" x2="75" y2="62" stroke="#4a4a4a" stroke-width="4"/>
+            <g fill="none" stroke="#666" stroke-width="4">
+              <ellipse cx="75" cy="70" rx="8" ry="11"/>
+              <ellipse cx="75" cy="90" rx="8" ry="11"/>
+              <ellipse cx="75" cy="110" rx="8" ry="11"/>
+              <ellipse cx="75" cy="130" rx="8" ry="11"/>
+              <ellipse cx="75" cy="150" rx="8" ry="11"/>
+            </g>
+            <path d="M60 165 h30 l6 20 h-42z" fill="#2c2c2c" stroke="#E10600" stroke-width="2"/>
+            <text x="75" y="200" text-anchor="middle" fill="#E10600" font-size="9" font-weight="700" font-family="Inter, sans-serif">BMAX</text>
+          </svg>
         </div>
         <div class="product-body">
           <h3>Brackets, Chains &amp; Mounts</h3>
@@ -189,7 +238,7 @@
             <span>Add to Bundle Builder</span>
           </label>
 
-          <button class="btn btn-primary btn-block add-to-cart" data-weight="4">View Brackets &amp; Chains</button>
+          <button class="btn btn-primary btn-block add-to-cart" data-weight="4" data-name="Bracket &amp; Chain Set">View Brackets &amp; Chains</button>
         </div>
       </article>
 
@@ -203,6 +252,50 @@
       <a href="#bundles" class="btn btn-ghost btn-small">Review Bundle</a>
     </div>
   </div>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section class="testimonials">
+    <div class="section-head">
+      <span class="eyebrow">Straight From Our Buyers</span>
+      <h2>What Customers Say</h2>
+      <p class="testimonials-note">Illustrative reviews reflecting common feedback themes — swap in verified quotes and photos from your eBay/Amazon storefronts when ready.</p>
+    </div>
+    <div class="testimonial-grid">
+      <article class="testimonial-card">
+        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <p>"Ordered the unfilled 5ft bag to save on shipping — filled it myself in an hour and it hasn't budged since. Stitching is properly heavy-duty."</p>
+        <div class="testimonial-person">
+          <span class="avatar">DM</span>
+          <div>
+            <strong>D. Marsh</strong>
+            <span>Home gym, Lancashire</span>
+          </div>
+        </div>
+      </article>
+      <article class="testimonial-card">
+        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <p>"Needed a bracket that could actually hold a full bag on a stud wall. This one's rated for it and shipped next day. No complaints."</p>
+        <div class="testimonial-person">
+          <span class="avatar">RK</span>
+          <div>
+            <strong>R. Kaur</strong>
+            <span>Amateur boxing coach</span>
+          </div>
+        </div>
+      </article>
+      <article class="testimonial-card">
+        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <p>"Bought the bundle instead of piecing it together myself — worked out way cheaper and everything arrived together. Sandbag's held up to daily bootcamp use."</p>
+        <div class="testimonial-person">
+          <span class="avatar">JT</span>
+          <div>
+            <strong>J. Thornley</strong>
+            <span>Outdoor fitness instructor</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
 
   <!-- ============ B2B LEAD GEN ============ -->
   <section class="b2b" id="custom">
